@@ -90,7 +90,7 @@ if st.session_state.fotos:
         with st.spinner("Procesando con IA..."):
             try:
                 modelo_ia = genai.GenerativeModel('gemini-2.5-flash')
-                prompt = f"Tengo esta secuencia de letras obtenidas de un modelo de lenguaje de señas: '{texto_crudo}'. Agrúpala en palabras con sentido, corrige pequeños errores de predicción y devuelve ÚNICAMENTE la frase final coherente. Si detectas que es una pregunta, ponle los signos adecuados."
+                prompt = f"Tengo esta secuencia de letras obtenidas de un modelo de lenguaje de señas: '{texto_crudo}'. Agrúpala en palabras con sentido, si encuentras un '?' eliminalo del texto antes de continuar con las siguientes indicaciones, corrige pequeños errores de predicción y devuelve ÚNICAMENTE la frase final coherente. Si detectas que es una pregunta, ponle los signos adecuados."
                 respuesta = modelo_ia.generate_content(prompt)
                 
                 st.success("### Frase Final:")
@@ -102,3 +102,4 @@ if st.session_state.fotos:
         st.session_state.fotos = []
         st.session_state.letras = []
         st.rerun()
+
